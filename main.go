@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/jignesh-dhua/go-energy-estimator/message"
+	"github.com/jignesh-dhua/go-energy-estimator/service"
 )
 
 func main() {
@@ -17,4 +18,8 @@ func main() {
 	for i := 0; i < len(messages); i++ {
 		fmt.Println(messages[i].Timestamp)
 	}
+
+	message := service.ParseFrom("1544206563 Delta -0.5")
+
+	fmt.Println(message)
 }
