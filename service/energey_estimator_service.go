@@ -10,7 +10,7 @@ func EstimateEnergyConsumption(messages []message.Message) float64 {
 func CalculateDuration(current message.Message, next message.Message) int64 {
 
 	if next.IsEmpty() {
-		return next.Timestamp.UnixNano() - current.Timestamp.UnixNano()
+		return next.Timestamp.Unix() - current.Timestamp.Unix()
 	} else {
 		return 0
 	}
