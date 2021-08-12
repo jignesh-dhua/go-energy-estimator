@@ -1,7 +1,6 @@
 package service
 
 import (
-	"fmt"
 	"strconv"
 	"strings"
 	"time"
@@ -15,8 +14,8 @@ func ParseFrom(msg string) message.Message {
 
 	fields := strings.Fields(msg)
 
-	fmt.Println(fields[0])
-	fmt.Println(fields[1])
+	// fmt.Println(fields[0])
+	// fmt.Println(fields[1])
 
 	timeInMilli, _ := strconv.ParseInt(fields[0], 10, 64)
 
@@ -26,7 +25,7 @@ func ParseFrom(msg string) message.Message {
 
 	case "Delta":
 		{
-			fmt.Println("Message type is delta")
+			//fmt.Println("Message type is delta")
 
 			if delta, err := strconv.ParseFloat(fields[2], 64); err == nil {
 				message.Value = delta
@@ -35,7 +34,7 @@ func ParseFrom(msg string) message.Message {
 		}
 	case "TurnOff":
 		{
-			fmt.Println("Message type is turnoff")
+			//fmt.Println("Message type is turnoff")
 		}
 	default:
 		{
@@ -43,7 +42,7 @@ func ParseFrom(msg string) message.Message {
 		}
 	}
 
-	fmt.Println(message)
+	//fmt.Println(message)
 
 	return message
 }

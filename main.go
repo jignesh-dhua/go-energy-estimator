@@ -1,25 +1,36 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
-	"time"
+	"os"
 
 	"github.com/jignesh-dhua/go-energy-estimator/message"
 	"github.com/jignesh-dhua/go-energy-estimator/service"
 )
 
 func main() {
-	fmt.Println("Hello World")
-	messages := []message.Message{
 
-		{Timestamp: time.Now(), MessageType: "Test", Value: 0.0},
+	var messages = ReadMessages()
+
+	fmt.Println("*** Messages ***")
+	fmt.Println(messages)
+}
+
+func ReadMessages() []message.Message {
+	scanner := bufio.NewScanner(os.Stdin)
+	//scanner.Split(bufio.ScanLines)
+
+	var messages []message.Message
+
+	for scanner.Scan() {
+		_, lines, err := bufio.ScanLines([]byte(scanner.Text()), true)
+		if err == nil {
+			fmt.Println("line :: ", string(lines))
+
+			messages = append(messages, service.ParseFrom(string(lines)))
+		}
 	}
 
-	for i := 0; i < len(messages); i++ {
-		fmt.Println(messages[i].Timestamp)
-	}
-
-	message := service.ParseFrom("1544206563 Delta -0.5")
-
-	fmt.Println(message)
+	return messages
 }
