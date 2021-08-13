@@ -2,7 +2,7 @@ package service
 
 import "math"
 
-func calculate(currentvalue float64, previousvalue float64) float64 {
+func Calculate(currentvalue float64, previousvalue float64) float64 {
 
 	if currentvalue == 0 {
 		return 0

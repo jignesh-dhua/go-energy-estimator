@@ -11,24 +11,30 @@ import (
 
 func main() {
 
-	var messages = ReadMessages()
+	// var messages = []string{"1544206562 TurnOff",
+	// 	"1544206563 Delta +0.5",
+	// 	"1544210163 TurnOff"}
 
+	var messages = ReadMessages()
 	fmt.Println("*** Messages ***")
 	fmt.Println(messages)
+
+	estimation := service.EstimateEnergyConsumption(message.Map(messages, service.ParseFrom))
+	fmt.Println("Estimation :: ", estimation)
 }
 
-func ReadMessages() []message.Message {
+func ReadMessages() []string {
 	scanner := bufio.NewScanner(os.Stdin)
 	//scanner.Split(bufio.ScanLines)
 
-	var messages []message.Message
+	var messages []string
 
 	for scanner.Scan() {
 		_, lines, err := bufio.ScanLines([]byte(scanner.Text()), true)
 		if err == nil {
 			fmt.Println("line :: ", string(lines))
 
-			messages = append(messages, service.ParseFrom(string(lines)))
+			messages = append(messages, string(lines))
 		}
 	}
 
